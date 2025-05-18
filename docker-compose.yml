@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    volumes:
+      - ./received_audio:/app/received_audio
+      - ./transcribed_text:/app/transcribed_text
+      - ./.env:/app/.env
+    restart: unless-stopped 

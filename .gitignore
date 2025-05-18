@@ -179,6 +179,7 @@ config.json
 
 # Environment variables
 .env
+.env_prod
 
 # Python
 __pycache__/

@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Environment
+.env
+.venv
+env/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Directories with данными
+received_audio/
+transcribed_text/
+
+# IDE
+.vscode/
+.idea/ 
