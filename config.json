@@ -1,9 +1,0 @@
-{
-    "folder_id": "bXXXXXXXXXX", // != folder_name
-    "language_code": "ru-RU",
-    "service_account": {
-        "id": "aXXXXXXXXXXXXXXXXXXX",
-        "key_id": "aXXXXXXXXXXXXXXXXXXX",
-        "private_key": "-----BEGIN PRIVATE KEY-----\nXXXXXXXXXXXXXXXXXXX\n-----END PRIVATE KEY-----\n"
-    }
-} 
