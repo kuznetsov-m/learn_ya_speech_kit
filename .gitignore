@@ -176,3 +176,15 @@ cython_debug/
 # my
 service-account.json
 config.json
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Directories
+received_audio/
+transcribed_text/
