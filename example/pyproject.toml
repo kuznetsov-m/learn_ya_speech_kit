@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ya-speech-kit"
+version = "0.1.0"
+description = "Yandex Speech Kit transcription tool"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+yandex-speechkit = "^1.5.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
