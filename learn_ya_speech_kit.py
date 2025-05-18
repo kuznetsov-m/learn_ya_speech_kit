@@ -3,6 +3,8 @@ import time
 import json
 import grpc
 import requests
+import jwt
+import datetime
 
 from tqdm import tqdm
 from pathlib import Path
@@ -14,7 +16,7 @@ def load_config():
         with open('config.json', 'r') as f:
             config = json.load(f)
             
-        required_fields = ['folder_id', 'language_code', 'oauth_token']
+        required_fields = ['folder_id', 'language_code', 'service_account']
         missing_fields = [field for field in required_fields if field not in config]
         
         if missing_fields:
@@ -24,7 +26,11 @@ def load_config():
 {
     "folder_id": "your-folder-id",
     "language_code": "ru-RU",
-    "oauth_token": "your-oauth-token"
+    "service_account": {
+        "id": "your-service-account-id",
+        "key_id": "your-key-id",
+        "private_key": "your-private-key"
+    }
 }
             """)
             raise ValueError("Invalid config format")
@@ -32,29 +38,34 @@ def load_config():
         return config
     except FileNotFoundError:
         print("Error: config.json file not found!")
-        print("Please create config.json with the following content:")
-        print("""
-{
-    "folder_id": "your-folder-id",
-    "language_code": "ru-RU",
-    "oauth_token": "your-oauth-token"
-}
-        """)
+        print("Please create config.json with the required content")
         raise
 
-def get_iam_token(oauth_token):
-    """Get IAM token using OAuth token."""
+def get_iam_token(service_account):
+    """Get IAM token using service account."""
     try:
+        now = datetime.datetime.now(datetime.timezone.utc)
+        jwt_token = jwt.encode(
+            {
+                'iss': service_account['id'],
+                'aud': 'https://iam.api.cloud.yandex.net/iam/v1/tokens',
+                'iat': now,
+                'exp': now + datetime.timedelta(hours=1)
+            },
+            service_account['private_key'],
+            algorithm='PS256',
+            headers={'kid': service_account['key_id']}
+        )
+
         response = requests.post(
             'https://iam.api.cloud.yandex.net/iam/v1/tokens',
-            json={'yandexPassportOauthToken': oauth_token}
+            json={'jwt': jwt_token}
         )
         response.raise_for_status()
         return response.json().get('iamToken')
     except requests.exceptions.RequestException as e:
         print("Error getting IAM token!")
-        print("Please make sure your OAuth token is valid.")
-        print("You can get an OAuth token here: https://oauth.yandex.ru/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb")
+        print("Please make sure your service account credentials are valid.")
         raise
 
 def read_audio_file(audio_file_path):
@@ -111,8 +122,8 @@ def transcribe_audio(audio_content, config):
     # Create audio
     audio = stt_service_pb2.RecognitionAudio(content=audio_content)
 
-    # Get IAM token using OAuth token
-    iam_token = get_iam_token(config['oauth_token'])
+    # Get IAM token using service account
+    iam_token = get_iam_token(config['service_account'])
     metadata = (('authorization', f'Bearer {iam_token}'),)
 
     try:
