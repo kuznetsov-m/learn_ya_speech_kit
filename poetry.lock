@@ -437,6 +437,17 @@ files = [
 ]
 
 [[package]]
+name = "pydub"
+version = "0.25.1"
+description = "Manipulate audio with an simple and easy high level interface"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pydub-0.25.1-py2.py3-none-any.whl", hash = "sha256:65617e33033874b59d87db603aa1ed450633288aefead953b30bded59cb599a6"},
+    {file = "pydub-0.25.1.tar.gz", hash = "sha256:980a33ce9949cab2a569606b65674d748ecbca4f0796887fd6f46173a7b0d30f"},
+]
+
+[[package]]
 name = "pyjwt"
 version = "2.10.1"
 description = "JSON Web Token implementation in Python"
@@ -651,6 +662,22 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "yandex-speechkit"
+version = "1.5.0"
+description = "SpeechKit package"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "yandex_speechkit-1.5.0-py3-none-any.whl", hash = "sha256:ca44b10c30d6acb6440ef623e559341205b269672ae7fecc52290cc6375884fb"},
+]
+
+[package.dependencies]
+grpcio = "*"
+protobuf = "*"
+pydub = "*"
+requests = "*"
+
+[[package]]
 name = "yandexcloud"
 version = "0.254.0"
 description = "The Yandex.Cloud official SDK"
@@ -673,4 +700,4 @@ six = ">=1.14.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "2263d8bb34943530980d591415d09385f6cd4492b50221334129f44d4898b704"
+content-hash = "77048185319e3e94b416bfb1dc247d772ecbed0fdb913c8831d8094d92b12ec9"

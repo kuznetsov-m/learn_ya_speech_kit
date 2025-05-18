@@ -16,6 +16,7 @@ soundfile = "0.12.1"
 scipy = "1.11.3"
 requests = "2.31.0"
 pyjwt = {extras = ["crypto"], version = "^2.10.1"}
+yandex-speechkit = "^1.5.0"
 
 
 [build-system]
