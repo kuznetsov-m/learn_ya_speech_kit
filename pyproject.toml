@@ -11,6 +11,8 @@ yandex-speechkit = "^1.5.0"
 python-telegram-bot = "^22.1"
 python-dotenv = "^1.1.0"
 pydub = "^0.25.1"
+yandexgpt-python = "^0.2.3"
+asyncio = "^3.4.3"
 
 
 [build-system]

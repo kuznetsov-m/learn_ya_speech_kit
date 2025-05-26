@@ -1,4 +1,5 @@
 # source: https://github.com/allseeteam/yandexgpt-python
+# https://yandex.cloud/ru/docs/foundation-models/prompts/yandexgpt/general-functions-summarization
 
 from yandex_gpt import YandexGPT, YandexGPTConfigManagerForAPIKey
 
